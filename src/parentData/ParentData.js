@@ -25,9 +25,9 @@ const ParentData = () => {
         <>
             <div className='my-20 flex justify-center w-full m-auto'>
                 {< div >
-                    <div className='border-2 border-black  '>
+                    <div className=' '>
 
-                        <div className='flex justify-center my-10 p-10' onClick={() => showParentNme()}> {showChildren.name}</div>
+                        <div className='flex justify-center my-10 p-10 bg-blue-600 text-white font-3xl font-bold' onClick={() => showParentNme()}> {showChildren.name}</div>
 
                     </div>
 

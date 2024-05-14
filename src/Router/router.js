@@ -4,6 +4,7 @@ import App from "../App";
 import Home from "../Home/Home";
 import ParentData from "../parentData/ParentData";
 import Data from "../data";
+import GrandParent from "../grandParent";
 
 
 const router = createBrowserRouter([
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
             {
                 path: "/data",
                 element: <Data />
+            },
+            {
+                path: "/grandparent",
+                element: <GrandParent />
             }
         ]
     }
