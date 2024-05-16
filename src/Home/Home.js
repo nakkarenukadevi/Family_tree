@@ -3,7 +3,7 @@ import mockdata from "../mockdata.json";
 import { useDispatch, useSelector } from 'react-redux'
 import { InitialfamilyData, deletePerson, searchPerson } from '../Store/familySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -60,24 +60,49 @@ const Home = () => {
             } return per
         });
         dispatch(InitialfamilyData(eperson))
-    }
+    };
 
+    const handlesortname = (e) => {
+
+        let dataCopy = { ...data };
+
+        dataCopy.familydata.sort((a, b) => a.name.localeCompare(b.name))
+        console.log(dataCopy)
+
+    }
     return (
         <>
-            <div className='flex justify-between p-10 '><Link to="/addperson"><button className='border-2 border-black py-4 px-6 rounded-lg   font-sans font-bold font-2xl bg-green-800 text-white' >Add</button></Link>
+            <div className='flex justify-between m-5 '>
+                <Link to="/addperson">
+                    <button className='border-2 border-black py-4 px-6 rounded-lg   font-sans font-bold font-2xl bg-green-800 text-white' >Add</button>
+                </Link>
 
-                <div><input type="text" value={search} onChange={(e) => { setSearch(e.target.value) }} className='border-2 border-black py-3 px-5 rounded-lg' />
-                    <button className='border-2 border-black py-3 px-6 rounded-lg   font-sans font-bold font-2xl bg-blue-700 text-white' onClick={() => { handleSearch() }}>search</button>
+                <div className='flex justify-between items-center' >
+
+                    <div> <input type="text" value={search} onChange={(e) => { setSearch(e.target.value) }} className='border-2 border-black py-3 px-5 rounded-lg' /></div>
+                    <div className='ml-3'><button className='border-2 border-black py-3 px-6 rounded-lg   font-sans font-bold font-2xl bg-blue-700 text-white' onClick={() => { handleSearch() }}>search</button></div>
                 </div>
             </div>
-            <table className=' border-separate border-spacing-2 border border-slate-400 m-auto mt-20 w-full'>
+            <table className=' border-separate border-spacing-2 border border-slate-400 m-auto  w-full '>
                 <thead>
-                    <tr className='bg-gray-300 font-bold text-2xl'>
+                    <tr className='bg-gray-300 font-bold text-xl'>
                         <td className='border border-slate-300  p-3'>Id</td>
-                        <td className='border border-slate-300  p-3'>Name</td>
-                        <td className='border border-slate-300  p-3'>Father</td>
-                        <td className='border border-slate-300  p-3 text-center'>delete</td>
-                        <td className='border border-slate-300  p-3 text-center'>Edit</td>
+                        <td className='border border-slate-300  p-3'>Name
+                            <FontAwesomeIcon icon={faSortDown} className='ml-10' />
+                        </td>
+                        <td className='border border-slate-300  p-3' onClick={(e) => {
+                            handlesortname(e)
+                        }}>
+                            Father
+                            <FontAwesomeIcon icon={faSortDown} />
+                        </td>
+                        <td className='border border-slate-300  p-3 text-center'>delete
+                            <FontAwesomeIcon icon={faSortDown} />
+                        </td>
+                        <td className='border border-slate-300  p-3 text-center'>Edit
+                            <FontAwesomeIcon icon={faSortDown} />
+                        </td>
+
 
 
 
@@ -92,7 +117,9 @@ const Home = () => {
                                 <td className='border border-slate-300  p-3'>{p.name}</td>
                                 <td className='border border-slate-300  p-3'>{p.parent_father}</td>
                                 <td className='border border-slate-300  p-3 text-center'><FontAwesomeIcon icon={faTrash} className='text-red-800' onClick={() => { handleDeletePerson(p.parent_id) }} /></td>
+
                                 <td className='border border-slate-300  p-3 text-center'><FontAwesomeIcon icon={faEdit} className='text-green-800' onClick={() => { handleEditPerson(p) }} /></td>
+
                             </tr>
                         </tbody>
                     })
