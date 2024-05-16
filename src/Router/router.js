@@ -2,9 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 
 import Home from "../Home/Home";
-import ParentData from "../parentData/ParentData";
-import Data from "../data";
-import GrandParent from "../grandParent";
+
+import Addperson from "../Addperson/Addperson";
+import EditPerson from "../Editperson/EditPerson";
+
 
 
 const router = createBrowserRouter([
@@ -17,17 +18,16 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: "/parentdata",
-                element: <ParentData />
+                path: "/addperson",
+                element: <Addperson />
             },
             {
-                path: "/data",
-                element: <Data />
-            },
-            {
-                path: "/grandparent",
-                element: <GrandParent />
+                path: "/editperson",
+                element: <EditPerson />
+
             }
+
+
         ]
     }
 ])
