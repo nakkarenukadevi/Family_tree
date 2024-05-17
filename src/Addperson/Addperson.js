@@ -8,8 +8,8 @@ const Addperson = () => {
     let [addperson, setAddPerson] = useState({
         parent_id: "",
         name: " ",
-        parent_relation: "",
-        parent_father: ""
+        relation: "",
+        father: ""
 
     })
     let navigate = useNavigate()
@@ -36,12 +36,12 @@ const Addperson = () => {
                     </div>
                     <div className='flex justify-between items-center m-3  font-sans font-bold'>
                         <div>    <label>Father Name</label></div>
-                        <div> <input type="text" onChange={(e) => { setAddPerson({ ...addperson, parent_father: e.target.value }) }} value={addperson.parent_father} className='border-2 border-black p-3' /></div>
+                        <div> <input type="text" onChange={(e) => { setAddPerson({ ...addperson, father: e.target.value }) }} value={addperson.father} className='border-2 border-black p-3' /></div>
 
                     </div>
                     <div className='flex justify-between items-center m-3  font-sans font-bold'>
                         <div><label>Relation</label> </div>
-                        <div> <input type="text" onChange={(e) => { setAddPerson({ ...addperson, parent_relation: e.target.value }) }} value={addperson.parent_relation} className='border-2 border-black p-3' /></div>
+                        <div> <input type="text" onChange={(e) => { setAddPerson({ ...addperson, relation: e.target.value }) }} value={addperson.relation} className='border-2 border-black p-3' /></div>
 
                     </div>
                     <div className=' text-center'><button className='py-3 bg-blue-800 text-white font-bold  px-4' onClick={() => handleaddNewPerson()}>Add person</button></div>

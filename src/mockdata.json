@@ -3,26 +3,26 @@
         {
             "parent_id": 1,
             "name": "reddy sanjeeva rao",
-            "parent_relation": "Self",
-            "parent_father": "no data"
+            "relation": "Self",
+            "father": "no data"
         },
         {
             "parent_id": 2,
             "name": "reddy bala rama swami",
-            "parent_relation": "son",
-            "parent_father": "reddy sanjeeva rao "
+            "relation": "son",
+            "father": "reddy sanjeeva rao "
         },
         {
             "parent_id": 3,
             "name": "reddy sankar rao",
-            "parent_relation": "son",
-            "parent_father": "reddy bala rama swami "
+            "relation": "son",
+            "father": "reddy bala rama swami "
         },
         {
             "parent_id": 4,
             "name": "reddy bhanu prakash",
-            "parent_relation": "son",
-            "parent_father": "reddy sankar rao "
+            "relation": "son",
+            "father": "reddy sankar rao "
         }
     ]
 }
