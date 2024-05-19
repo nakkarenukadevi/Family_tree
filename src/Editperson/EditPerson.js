@@ -18,10 +18,8 @@ const EditPerson = () => {
                 return { ...per, ...editPerson }
             } return per
         });
-        console.log(eperson)
         navigate("/")
         dispatch(InitialfamilyData(eperson))
-
     }
     return (
         <div className='flex justify-center m-auto border-2 border-black  mt-10 p-10 rounded-lg bg-orange-400'>

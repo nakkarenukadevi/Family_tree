@@ -3,7 +3,7 @@ import mockdata from "../mockdata.json";
 import { useDispatch, useSelector } from 'react-redux'
 import { InitialfamilyData, deletePerson, searchPerson } from '../Store/familySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faTrash, faSortDown } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faSortDown, faSortUp } from '@fortawesome/free-solid-svg-icons';
 
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -13,7 +13,6 @@ const Home = () => {
 
     let [search, setSearch] = useState("");
     let [editPop, setEditPop] = useState(false);
-    let [editPerson, setEditPerson] = useState({})
     let dispatch = useDispatch();
 
     useEffect(() => {
@@ -74,7 +73,7 @@ const Home = () => {
             let finalData = dataCopy.sort((a, b) => {
 
                 if (e.target.id === "id") {
-                    return a.id - b.id;
+                    return a.parent_id - b.parent_id;
                 }
                 return a[e.target.id].localeCompare(b[e.target.id]);
 
@@ -100,13 +99,18 @@ const Home = () => {
             <table className=' border-separate border-spacing-2 border border-slate-400 m-auto  w-full '>
                 <thead >
                     <tr className='bg-gray-300 font-bold text-xl' key="headers" onClick={handlesortname}>
-                        <td className='border border-slate-300  p-3' id="id" key="id">Id</td>
-                        <td className='border border-slate-300  p-3' id="name" key="name">Name
-                            <FontAwesomeIcon icon={faSortDown} className='ml-10' />
+                        <td className='border border-slate-300  p-3' key="id">
+                            Id
+                            <FontAwesomeIcon id="id" icon={faSortDown} />
                         </td>
-                        <td className='border border-slate-300  p-3' id="father" key="father">
+                        <td className='border border-slate-300  p-3' key="name">
+                            Name
+
+                            <FontAwesomeIcon id="name" icon={faSortDown} />
+                        </td>
+                        <td className='border border-slate-300  p-3' key="father">
                             Father
-                            <FontAwesomeIcon icon={faSortDown} />
+                            <FontAwesomeIcon id="father" icon={faSortDown} />
                         </td>
                         <td className='border border-slate-300  p-3 text-center' key="delete-action">delete
                         </td>
