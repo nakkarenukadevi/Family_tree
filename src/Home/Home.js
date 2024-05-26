@@ -3,7 +3,7 @@ import mockdata from "../mockdata.json";
 import { useDispatch, useSelector } from 'react-redux'
 import { InitialfamilyData, deletePerson, searchPerson } from '../Store/familySlice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEdit, faTrash, faSortDown, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faSortDown, faHome, faSortUp } from '@fortawesome/free-solid-svg-icons';
 
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -65,27 +65,49 @@ const Home = () => {
         dispatch(InitialfamilyData(eperson))
     };
 
-    const handlesortname = (e) => {
+    const handlesortname = (e, order) => {
+        if (order == "ass") {
+            if (["id", "father", "name", "relation"].includes(e.target.id)) {
+
+                let dataCopy = [...data.familydata];
 
 
-        if (["id", "father", "name", "relation"].includes(e.target.id)) {
 
-            let dataCopy = [...data.familydata];
+                let finalData = dataCopy.sort((a, b) => {
 
+                    if (e.target.id === "id") {
+                        return a.parent_id - b.parent_id;
+                    }
+                    return a[e.target.id].localeCompare(b[e.target.id]);
 
-
-            let finalData = dataCopy.sort((a, b) => {
-
-                if (e.target.id === "id") {
-                    return a.parent_id - b.parent_id;
-                }
-                return a[e.target.id].localeCompare(b[e.target.id]);
-
-            });
-            dispatch(InitialfamilyData(finalData));
+                });
+                dispatch(InitialfamilyData(finalData));
 
 
+            }
+        } else if (order == "diss") {
+            if (["id", "father", "name", "relation"].includes(e.target.id)) {
+
+                let dataCopy = [...data.familydata];
+
+
+
+                let finalData = dataCopy.sort((a, b) => {
+
+                    if (e.target.id === "id") {
+                        return b.parent_id - a.parent_id;
+                    }
+                    return b[e.target.id].localeCompare(a[e.target.id]);
+
+                });
+                dispatch(InitialfamilyData(finalData));
+
+
+            }
         }
+
+
+
     }
     const gotoHomepage = () => {
         dispatch(InitialfamilyData(mockdata.family_tree))
@@ -106,19 +128,40 @@ const Home = () => {
             </div>
             <table className=' border-separate border-spacing-2 border border-slate-400 m-auto  w-full '>
                 <thead >
-                    <tr className='bg-gray-300 font-bold text-xl' key="headers" onClick={handlesortname}>
+                    <tr className='bg-gray-300 font-bold text-xl' key="headers" >
                         <td className='border border-slate-300  p-3' key="id">
-                            Id
-                            <FontAwesomeIcon id="id" icon={faSortDown} />
+                            <div className='flex justify-between items-center'>
+                                <div>  Id</div>
+                                <div className='flex flex-col '>
+                                    <div className=''>     <FontAwesomeIcon id="id" icon={faSortUp} onClick={(e) => { handlesortname(e, "diss") }} className='' /></div>
+                                    <div>     <FontAwesomeIcon id="id" icon={faSortDown} onClick={(e) => { handlesortname(e, "ass") }} className='' /></div>
+                                </div>
+                            </div>
+
+
+
+
                         </td>
                         <td className='border border-slate-300  p-3' key="name">
-                            Name
 
-                            <FontAwesomeIcon id="name" icon={faSortDown} />
+                            <div className='flex justify-between items-center'>
+                                <div>  Name</div>
+                                <div className='flex flex-col'>
+                                    <div>     <FontAwesomeIcon id="name" icon={faSortUp} onClick={(e) => { handlesortname(e, "diss") }} /></div>
+                                    <div>     <FontAwesomeIcon id="name" icon={faSortDown} onClick={(e) => { handlesortname(e, "ass") }} /></div>
+                                </div>
+                            </div>
+
+
                         </td>
                         <td className='border border-slate-300  p-3' key="father">
-                            Father
-                            <FontAwesomeIcon id="father" icon={faSortDown} />
+                            <div className='flex justify-between items-center'>
+                                <div>  Father</div>
+                                <div className=' flex flex-col'>
+                                    <div>     <FontAwesomeIcon id="father" icon={faSortUp} onClick={(e) => { handlesortname(e, "diss") }} /></div>
+                                    <div>     <FontAwesomeIcon id="father" icon={faSortDown} onClick={(e) => { handlesortname(e, "ass") }} /></div>
+                                </div>
+                            </div>
                         </td>
                         <td className='border border-slate-300  p-3 text-center' key="delete-action">delete
                         </td>
